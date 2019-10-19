@@ -3,7 +3,7 @@ from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from flaskblog.models import Manufacturer, Supplier
+from team16.models import Manufacturer, Supplier
 
 # Made by Team 16 at GS1 Tracathon 10/19/19
 
