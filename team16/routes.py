@@ -3,9 +3,10 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from team16 import app, db, bcrypt, mail
-from team16.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
-                            PostForm, RequestResetForm, ResetPasswordForm)
-from team16.models import User, Post
+from team16.forms import (RegistrationManufacturerForm, RegistrationSupplierForm,
+                            LoginForm, UpdateAccountForm, PostForm,
+                            RequestResetForm, ResetPasswordForm)
+from team16.models import Manufacturer, Supplier, Post
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
@@ -19,13 +20,11 @@ def archive():
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html', posts=posts)
-
+    return render_template('home.html')
 
 @app.route("/about")
 def about():
     return render_template('about.html', title='About')
-
 
 @app.route("/register-manufacturer", methods=['GET', 'POST'])
 def registerManufacturer():
@@ -65,9 +64,7 @@ def loginManufacturer():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page)
-            if next_page
-                else redirect(url_for('home'))
+            return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login as manufacturer', form=form)
