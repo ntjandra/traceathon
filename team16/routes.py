@@ -27,7 +27,7 @@ def about():
     return render_template('about.html', title='About')
 
 @app.route("/register-manufacturer", methods=['GET', 'POST'])
-def registerManufacturer():
+def register_manufacturer():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegistrationManufacturerForm()
@@ -41,7 +41,7 @@ def registerManufacturer():
     return render_template('register-manufacturer.html', title='Register as manufacturer', form=form)
 
 @app.route("/register-supplier", methods=['GET', 'POST'])
-def registerSupplier():
+def register_supplier():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegistrationSupplierForm()
@@ -55,7 +55,7 @@ def registerSupplier():
     return render_template('register-supplier.html', title='Register as Supplier', form=form)
 
 @app.route("/login-manufacturer", methods=['GET', 'POST'])
-def loginManufacturer():
+def login_manufacturer():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = LoginForm()
@@ -71,7 +71,7 @@ def loginManufacturer():
 
 
 @app.route("/login-supplier", methods=['GET', 'POST'])
-def loginSupplier():
+def login_supplier():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = LoginForm()
@@ -103,7 +103,6 @@ def save_picture(form_picture):
     i.save(picture_path)
 
     return picture_fn
-
 
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
@@ -193,7 +192,8 @@ def send_reset_email(user):
 
 If you did not make this request then ignore this email for no changes.
 '''
-    
+"""
+# Refactor for Supplier and Manufacturer
 @app.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
@@ -222,7 +222,7 @@ def reset_token(token):
         flash('Your password has been changed! You are now able to log in', 'success')
         return redirect(url_for('login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
-
+ """
 # Page not found
 @app.route('/<name>')
 def index(name):
