@@ -71,7 +71,7 @@ def login_manufacturer():
 
 
 @app.route("/login-supplier", methods=['GET', 'POST'])
-def login_supplier():
+def loginupplier():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = LoginForm()

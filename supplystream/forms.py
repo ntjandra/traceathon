@@ -53,7 +53,6 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
-
 class UpdateAccountForm(FlaskForm):
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
@@ -73,12 +72,20 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('That email is taken. Please choose a different one.')
-                
+
+# Manufacturer Only: Form to log pallete
 class PostForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Content',validators=[DataRequired()])
+    start = StringField('Title', validators=[DataRequired()])
+    finish = StringField('Title', validators=[DataRequired()])
+    pallete = StringField('Title', validators=[DataRequired()])
     submit = SubmitField('Post')
-    
+
+class StatusForm(FlaskForm):
+    temperature = IntegerField('Temperature')
+    speed = IntegerField('Temperature')
+
+""" 
+Moved to backlog
 class RequestResetForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
@@ -94,3 +101,4 @@ class ResetPasswordForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password',
                         validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')
+"""
